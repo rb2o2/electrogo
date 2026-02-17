@@ -63,14 +63,14 @@ class AppFrame extends JFrame {
     private final Mesh2D mesh = new Mesh2D(64, 64, 64);
     private final GameClient gameClient;
     private final String joinCode;
-    private JPanel panel;
-    private JLabel scoreText;
-    private JLabel chargeText;
-    private JButton okMoveButton;
+    private final JPanel panel;
+    private final JLabel scoreText;
+    private final JLabel chargeText;
+    private final JButton okMoveButton;
 
     public AppFrame(GameClient gameClient, String joinCode) {
         try {
-            MAX_CHARGE = Double.valueOf(GameServer.loadConfig().get("charge").toString());
+            MAX_CHARGE = Double.parseDouble(GameServer.loadConfig().get("charge").toString());
         } catch (IOException x) {
             MAX_CHARGE = 10.0;
         }

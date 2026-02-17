@@ -33,13 +33,11 @@ public final class GameServer {
         int port = Integer.parseInt(props.getProperty("server.port", String.valueOf(DEFAULT_PORT)));
 
         LobbyState lobbyState = new LobbyState();
-        WebSocketConnectionCallback callback = new WebSocketConnectionCallback() {
-            @Override
-            public void onConnect(WebSocketHttpExchange exchange, WebSocketChannel channel) {
+        WebSocketConnectionCallback callback = (WebSocketHttpExchange exchange, WebSocketChannel channel) -> {
                 channel.getReceiveSetter().set(new GameMessageReceiver(lobbyState, channel));
                 channel.resumeReceives();
-            }
-        };
+            };
+
         PathHandler path = new PathHandler()
                 .addExactPath("/game", new WebSocketProtocolHandshakeHandler(callback));
 
