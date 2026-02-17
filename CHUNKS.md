@@ -9,7 +9,7 @@
 - [x] add config.properties in project root with server connection IP/key
 - [x] implement basic Undertow WebSocket server (start/stop, single endpoint)
 - [x] define and parse message types: CONNECT TO LOBBY, CODE, NEW LOBBY, MOVE, WINNER
-- [ ] server: lobby state (4-digit code per lobby, track pair of clients per code)
+- [x] server: lobby state (4-digit code per lobby, track pair of clients per code)
 - [ ] client: on start ask connect-via-code or open lobby; connect to server via WebSocket
 - [ ] client: open lobby flow -> send NEW LOBBY, receive CODE; show code to user
 - [ ] client: connect to lobby flow -> send CONNECT TO LOBBY + CODE; server matches and starts game

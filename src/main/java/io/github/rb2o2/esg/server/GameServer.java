@@ -26,10 +26,12 @@ public final class GameServer {
         String host = props.getProperty("server.host", DEFAULT_HOST);
         int port = Integer.parseInt(props.getProperty("server.port", String.valueOf(DEFAULT_PORT)));
 
+        LobbyState lobbyState = new LobbyState();
         WebSocketConnectionCallback callback = new WebSocketConnectionCallback() {
             @Override
             public void onConnect(WebSocketHttpExchange exchange, WebSocketChannel channel) {
-                // placeholder: will handle lobby/moves in later chunks
+                channel.getReceiveSetter().set(new GameMessageReceiver(lobbyState, channel));
+                channel.resumeReceives();
             }
         };
         PathHandler path = new PathHandler()
