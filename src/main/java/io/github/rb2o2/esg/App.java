@@ -85,6 +85,11 @@ class AppFrame extends JFrame {
         okMoveButton.setText("Move 1");
         okMoveButton.addActionListener((ActionEvent a) -> {
             var c = Double.parseDouble(textFieldC.getText());
+            double remaining = moves.size() % 2 == 0 ? chargeP1 : chargeP2;
+            if (c > remaining || c <= 0) {
+                JOptionPane.showMessageDialog(this, "Charge must be in (0, " + String.format("%.1f", remaining) + "]");
+                return;
+            }
             if (moves.size() % 2 == 0) { chargeP1 -= c; } else { chargeP2 -= c; }
             var mv = new Double[] {
                     Double.parseDouble(textFieldX.getText()),
