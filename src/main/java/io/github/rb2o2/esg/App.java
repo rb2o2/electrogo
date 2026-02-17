@@ -17,6 +17,7 @@ public class App {
 }
 
 class AppFrame extends JFrame {
+    private static final double MAX_CHARGE = 10.0;
     private final Color p1 = new Color(19, 200, 42);
     private final Color p2 = new Color(181, 0, 75);
     private final Color c1 = new Color(0,255,0);
@@ -24,6 +25,8 @@ class AppFrame extends JFrame {
     private final Color[][] colorMesh;
     private final List<Double[]> moves = new ArrayList<>();
     private int moveN = 1;
+    private double chargeP1 = MAX_CHARGE;
+    private double chargeP2 = MAX_CHARGE;
     private final Mesh2D mesh = new Mesh2D(64, 64, 64);
     public AppFrame() {
         setLayout(new BorderLayout());
@@ -81,10 +84,12 @@ class AppFrame extends JFrame {
         okMoveButton.setForeground(p2);
         okMoveButton.setText("Move 1");
         okMoveButton.addActionListener((ActionEvent a) -> {
+            var c = Double.parseDouble(textFieldC.getText());
+            if (moves.size() % 2 == 0) { chargeP1 -= c; } else { chargeP2 -= c; }
             var mv = new Double[] {
                     Double.parseDouble(textFieldX.getText()),
                     Double.parseDouble(textFieldY.getText()),
-                    Double.parseDouble(textFieldC.getText())};
+                    c};
             moves.add(mv);
             okMoveButton.setForeground(moves.size()%2 ==0?p2:p1);
             okMoveButton.setText(". . .");
