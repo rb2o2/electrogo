@@ -118,6 +118,11 @@ class AppFrame extends JFrame {
             okMoveButton.setText("Move %d".formatted(++moveN));
             double curCharge = moves.size() % 2 == 0 ? chargeP1 : chargeP2;
             chargeText.setText("Charge: " + String.format("%.1f", curCharge));
+            if (chargeP1 <= 0 && chargeP2 <= 0) {
+                okMoveButton.setEnabled(false);
+                String msg = scoreP1 > scoreP2 ? "Player 1 wins" : scoreP2 > scoreP1 ? "Player 2 wins" : "Draw";
+                JOptionPane.showMessageDialog(this, msg);
+            }
             panel.repaint();
         });
         panel.addMouseListener(new MouseAdapter() {

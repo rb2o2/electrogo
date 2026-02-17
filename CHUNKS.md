@@ -2,7 +2,7 @@
 - [x] add charge state: MAX_CHARGE 10.0, chargeP1 and chargeP2; deduct c from current player on move
 - [x] validate move: reject if c > remaining charge for current player
 - [x] display current player's charge in UI (always visible)
-- [ ] when both charges reach 0.0: determine winner by points, show game over and winner; stop accepting moves
+- [x] when both charges reach 0.0: determine winner by points, show game over and winner; stop accepting moves
 
 # BIG FEATURE - WEBSOCKET GAME SERVER
 - [ ] create io.github.rb2o2.esg.server package; add Undertow WebSocket dependency to pom.xml
