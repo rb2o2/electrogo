@@ -57,7 +57,7 @@ public final class GameServer {
         }
     }
 
-    private static Properties loadConfig() throws IOException {
+    public static Properties loadConfig() throws IOException {
         var p = new Properties();
         Path path = Path.of(CONFIG_PATH);
         if (Files.exists(path)) {

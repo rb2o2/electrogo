@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import io.github.rb2o2.esg.server.GameMessage;
+import io.github.rb2o2.esg.server.GameServer;
 
 import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,7 +50,7 @@ public class App {
 }
 
 class AppFrame extends JFrame {
-    private static final double MAX_CHARGE = 10.0;
+    private double MAX_CHARGE;
     private final Color p1 = new Color(19, 200, 42);
     private final Color p2 = new Color(181, 0, 75);
     private final Color c1 = new Color(0,255,0);
@@ -56,8 +58,8 @@ class AppFrame extends JFrame {
     private final Color[][] colorMesh;
     private final List<Double[]> moves = new ArrayList<>();
     private int moveN = 1;
-    private double chargeP1 = MAX_CHARGE;
-    private double chargeP2 = MAX_CHARGE;
+    private double chargeP1;
+    private double chargeP2;
     private final Mesh2D mesh = new Mesh2D(64, 64, 64);
     private final GameClient gameClient;
     private final String joinCode;
@@ -67,6 +69,13 @@ class AppFrame extends JFrame {
     private JButton okMoveButton;
 
     public AppFrame(GameClient gameClient, String joinCode) {
+        try {
+            MAX_CHARGE = Double.valueOf(GameServer.loadConfig().get("charge").toString());
+        } catch (IOException x) {
+            MAX_CHARGE = 10.0;
+        }
+        chargeP1 = MAX_CHARGE;
+        chargeP2 = MAX_CHARGE;
         this.gameClient = gameClient;
         this.joinCode = joinCode;
         setLayout(new BorderLayout());
@@ -90,7 +99,7 @@ class AppFrame extends JFrame {
         textFieldC.setColumns(6);
         var labelC = new JLabel("c:");
         scoreText = new JLabel("0 : 0");
-        chargeText = new JLabel("Charge: 10.0");
+        chargeText = new JLabel("Charge: %.1f".formatted(MAX_CHARGE));
         panel = new JPanel() {
             @Override
             public void paint(Graphics g) {
