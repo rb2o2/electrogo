@@ -15,6 +15,12 @@ import java.util.Properties;
 
 public final class GameServer {
 
+    public static void main(String[] args) throws IOException {
+        GameServer s = new GameServer();
+        s.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(s::stop));
+    }
+
     private static final String CONFIG_PATH = "config.properties";
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 8080;
