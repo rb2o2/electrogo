@@ -28,6 +28,16 @@ final class GameMessageReceiver extends AbstractReceiveListener {
                 if (lobbyState.joinLobby(msg.getPayload(), ch))
                     WebSockets.sendText(GameMessage.code(msg.getPayload()).toWire(), ch, null);
             }
+            case MOVE -> {
+                WebSocketChannel peer = lobbyState.getPeer(ch);
+                if (peer != null) WebSockets.sendText(msg.toWire(), peer, null);
+            }
+            case WINNER -> {
+                WebSocketChannel peer = lobbyState.getPeer(ch);
+                if (peer != null) WebSockets.sendText(msg.toWire(), peer, null);
+                lobbyState.removeLobby(ch);
+                if (peer != null) lobbyState.removeLobby(peer);
+            }
             default -> { }
         }
     }

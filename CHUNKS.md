@@ -10,10 +10,10 @@
 - [x] implement basic Undertow WebSocket server (start/stop, single endpoint)
 - [x] define and parse message types: CONNECT TO LOBBY, CODE, NEW LOBBY, MOVE, WINNER
 - [x] server: lobby state (4-digit code per lobby, track pair of clients per code)
-- [ ] client: on start ask connect-via-code or open lobby; connect to server via WebSocket
-- [ ] client: open lobby flow -> send NEW LOBBY, receive CODE; show code to user
-- [ ] client: connect to lobby flow -> send CONNECT TO LOBBY + CODE; server matches and starts game
-- [ ] server: relay other player's MOVE to respective client
-- [ ] client: disable move button after own move; reenable when server sends opponent MOVE
-- [ ] client: on connection error return to lobby creation/selection
-- [ ] server+client: on winner send WINNER; client shows YOU WIN / YOU LOSE, close connection, clear lobby state
+- [x] client: on start ask connect-via-code or open lobby; connect to server via WebSocket
+- [x] client: open lobby flow -> send NEW LOBBY, receive CODE; show code to user
+- [x] client: connect to lobby flow -> send CONNECT TO LOBBY + CODE; server matches and starts game
+- [x] server: relay other player's MOVE to respective client
+- [x] client: disable move button after own move; reenable when server sends opponent MOVE
+- [x] client: on connection error return to lobby creation/selection
+- [x] server+client: on winner send WINNER; client shows YOU WIN / YOU LOSE, close connection, clear lobby state
