@@ -8,7 +8,7 @@
 - [x] create io.github.rb2o2.esg.server package; add Undertow WebSocket dependency to pom.xml
 - [x] add config.properties in project root with server connection IP/key
 - [x] implement basic Undertow WebSocket server (start/stop, single endpoint)
-- [ ] define and parse message types: CONNECT TO LOBBY, CODE, NEW LOBBY, MOVE, WINNER
+- [x] define and parse message types: CONNECT TO LOBBY, CODE, NEW LOBBY, MOVE, WINNER
 - [ ] server: lobby state (4-digit code per lobby, track pair of clients per code)
 - [ ] client: on start ask connect-via-code or open lobby; connect to server via WebSocket
 - [ ] client: open lobby flow -> send NEW LOBBY, receive CODE; show code to user
