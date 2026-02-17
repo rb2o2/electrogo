@@ -50,6 +50,7 @@ class AppFrame extends JFrame {
         textFieldC.setColumns(6);
         var labelC = new JLabel("c:");
         var scoreText = new JLabel("0 : 0");
+        var chargeText = new JLabel("Charge: 10.0");
         var panel = new JPanel() {
             @Override
             public void paint(Graphics g) {
@@ -115,6 +116,8 @@ class AppFrame extends JFrame {
             }
             scoreText.setText("<html><font color='red'>%d</font> : <font color='green'>%d</font></html>".formatted(scoreP2,scoreP1));
             okMoveButton.setText("Move %d".formatted(++moveN));
+            double curCharge = moves.size() % 2 == 0 ? chargeP1 : chargeP2;
+            chargeText.setText("Charge: " + String.format("%.1f", curCharge));
             panel.repaint();
         });
         panel.addMouseListener(new MouseAdapter() {
@@ -154,6 +157,8 @@ class AppFrame extends JFrame {
         gc.gridwidth = GridBagConstraints.REMAINDER;
         layout.setConstraints(scoreText, gc);
         inputPanel.add(scoreText);
+        layout.setConstraints(chargeText, gc);
+        inputPanel.add(chargeText);
         gc.gridwidth = 4;
         layout.setConstraints(okMoveButton, gc);
         inputPanel.add(okMoveButton);
