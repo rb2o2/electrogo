@@ -5,7 +5,7 @@
 - [x] when both charges reach 0.0: determine winner by points, show game over and winner; stop accepting moves
 
 # BIG FEATURE - WEBSOCKET GAME SERVER
-- [ ] create io.github.rb2o2.esg.server package; add Undertow WebSocket dependency to pom.xml
+- [x] create io.github.rb2o2.esg.server package; add Undertow WebSocket dependency to pom.xml
 - [ ] add config.properties in project root with server connection IP/key
 - [ ] implement basic Undertow WebSocket server (start/stop, single endpoint)
 - [ ] define and parse message types: CONNECT TO LOBBY, CODE, NEW LOBBY, MOVE, WINNER
