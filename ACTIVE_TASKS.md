@@ -25,4 +25,5 @@ We need a websocket game server for multiplayer matching
     - 'WINNER' 
 
 
-  
+# FEATURE - display both players' charge
+- Charge shoud be displayed for both players, each in corresponding color
