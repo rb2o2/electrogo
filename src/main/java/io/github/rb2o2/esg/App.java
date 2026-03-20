@@ -68,6 +68,21 @@ class AppFrame extends JFrame {
     private final JLabel chargeText;
     private final JButton okMoveButton;
 
+    private static String toHex(Color color) {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    private void updateChargeText() {
+        int currentPlayer = moves.size() % 2 == 0 ? 1 : 2; // next move after the current move count
+        String p1Val = String.format(Locale.US, "%.1f", chargeP1);
+        String p2Val = String.format(Locale.US, "%.1f", chargeP2);
+        String p1Part = "<font color='" + toHex(p1) + "'>" + p1Val + "</font>";
+        String p2Part = "<font color='" + toHex(p2) + "'>" + p2Val + "</font>";
+        if (currentPlayer == 1) p1Part = "<b>" + p1Part + "</b>";
+        if (currentPlayer == 2) p2Part = "<b>" + p2Part + "</b>";
+        chargeText.setText("<html>P1 Charge: " + p1Part + "<br>P2 Charge: " + p2Part + "</html>");
+    }
+
     public AppFrame(GameClient gameClient, String joinCode) {
         try {
             MAX_CHARGE = Double.parseDouble(GameServer.loadConfig().get("charge").toString());
@@ -99,7 +114,8 @@ class AppFrame extends JFrame {
         textFieldC.setColumns(6);
         var labelC = new JLabel("c:");
         scoreText = new JLabel("0 : 0");
-        chargeText = new JLabel("Charge: %.1f".formatted(MAX_CHARGE));
+        chargeText = new JLabel();
+        updateChargeText();
         panel = new JPanel() {
             @Override
             public void paint(Graphics g) {
@@ -165,8 +181,7 @@ class AppFrame extends JFrame {
             }
             scoreText.setText("<html><font color='red'>%d</font> : <font color='green'>%d</font></html>".formatted(scoreP2,scoreP1));
             okMoveButton.setText("Move %d".formatted(++moveN));
-            double curCharge = moves.size() % 2 == 0 ? chargeP1 : chargeP2;
-            chargeText.setText("Charge: " + String.format("%.1f", curCharge));
+            updateChargeText();
             if (gameClient != null) {
                 gameClient.send(GameMessage.move(mv[0], mv[1], mv[2]));
                 okMoveButton.setEnabled(false);
@@ -280,8 +295,7 @@ class AppFrame extends JFrame {
         scoreText.setText("<html><font color='red'>%d</font> : <font color='green'>%d</font></html>".formatted(scoreP2, scoreP1));
         moveN++;
         okMoveButton.setText("Move %d".formatted(moveN));
-        double curCharge = moves.size() % 2 == 0 ? chargeP1 : chargeP2;
-        chargeText.setText("Charge: " + String.format("%.1f", curCharge));
+        updateChargeText();
         if (chargeP1 <= 0 && chargeP2 <= 0) {
             okMoveButton.setEnabled(false);
             JOptionPane.showMessageDialog(this, scoreP1 > scoreP2 ? "Player 1 wins" : scoreP2 > scoreP1 ? "Player 2 wins" : "Draw");

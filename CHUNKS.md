@@ -17,3 +17,6 @@
 - [x] client: disable move button after own move; reenable when server sends opponent MOVE
 - [x] client: on connection error return to lobby creation/selection
 - [x] server+client: on winner send WINNER; client shows YOU WIN / YOU LOSE, close connection, clear lobby state
+
+# FEATURE - display both players' charge
+- [x] display chargeP1 and chargeP2 simultaneously in corresponding colors (highlighting current player)
